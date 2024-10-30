@@ -14,21 +14,16 @@ class AddClient(unittest.TestCase):
             
     def test_add_client(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_client_page(wd)
         self.create_client(wd, Client(firstname="firstqweqwe", middlename="middlejhfghkdjfhfgdf", lastname="lastjvhfdkjghg", nickname="nicjfhdjkghf",
                            title="titltfjdjfhjdhgh", company="companyhdjfkshkfs", address="adreddkdfkjgldfjgfdjkfjgldfkjg", homephone="85654752453426",
                            mobilephone="987988989", workphone="1074567456757555", fax="2475858585", emaleone="hdhfwghfg@hgjhfg.com",
                            emailtwo="fhgerhgjrhhh@ffjgjg.com", emailthree="fhfh@.com", homepage="qwe", daybirthday="2", monthbirthday="February", yearbirthday="2006", annday="5", annmonth="July", annyear="2008"))
-        self.return_home_page(wd)
         self.logout(wd)
 
     def test_add_empty_client(self):
             wd = self.wd
-            self.open_home_page(wd)
             self.login(wd, username="admin", password="secret")
-            self.open_client_page(wd)
             self.create_client(wd, Client(firstname="", middlename="",
                                lastname="", nickname="",
                                title="", company="",
@@ -38,7 +33,6 @@ class AddClient(unittest.TestCase):
                                emailtwo="", emailthree="", homepage="",
                                daybirthday="-", monthbirthday="-", yearbirthday="-", annday="-",
                                annmonth="-", annyear="-"))
-            self.return_home_page(wd)
             self.logout(wd)
 
     def logout(self, wd):
@@ -48,6 +42,7 @@ class AddClient(unittest.TestCase):
         wd.find_element_by_link_text("home page").click()
 
     def create_client(self, wd, client):
+        self.open_client_page(wd)
         # fill client form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -110,11 +105,13 @@ class AddClient(unittest.TestCase):
         wd.find_element_by_name("ayear").send_keys(client.annyear)
         # create client
         wd.find_element_by_xpath("//div[@id='content']/form/input[20]").click()
+        self.return_home_page(wd)
 
     def open_client_page(self, wd):
         wd.find_element_by_link_text("add new").click()
 
     def login(self, wd, username, password):
+        self.open_home_page(wd)
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
