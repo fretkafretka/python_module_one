@@ -3,6 +3,7 @@ from fixture.client import ClientHelper
 from fixture.group import GroupHelper
 from fixture.session import SessionHelper
 
+
 class Application:
 
     def __init__(self):
@@ -12,10 +13,9 @@ class Application:
         self.group = GroupHelper(self)
         self.client = ClientHelper(self)
 
-
     def open_home_page(self):
         wd = self.wd
-        wd.get("http://localhost/addressbook/group.php")
+        wd.get("http://localhost/addressbook")
 
     def destroy(self):
         self.wd.quit()

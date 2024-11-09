@@ -1,3 +1,5 @@
+from selenium.webdriver.common.keys import Keys
+
 
 class ClientHelper:
 
@@ -6,12 +8,26 @@ class ClientHelper:
 
     def return_home_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home page").click()
+        wd.find_element_by_link_text("home").click()
 
     def create(self, client):
         wd = self.app.wd
         self.open_client_page()
-        # fill client form
+        self.fill_client_form(client)
+        wd.find_element_by_xpath("//div[@id='content']/form/input[20]").click()
+        self.return_home_page()
+
+    def change(self, client):
+        wd = self.app.wd
+        self.return_home_page()
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        self.fill_client_form(client)
+        wd.find_element_by_name("update").click()
+        self.return_home_page()
+
+    def fill_client_form(self, client):
+        wd = self.app.wd
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(client.firstname)
@@ -71,9 +87,18 @@ class ClientHelper:
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys(client.annyear)
-        # create client
-        wd.find_element_by_xpath("//div[@id='content']/form/input[20]").click()
+
+    def delete_first_client(self):
+        wd = self.app.wd
         self.return_home_page()
+        # select first client
+        wd.find_element_by_name("selected[]").click()
+        # scroll
+        wd.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+        #submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        self.return_home_page()
+
 
     def open_client_page(self):
         wd = self.app.wd
