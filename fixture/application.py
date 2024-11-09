@@ -3,8 +3,6 @@ from fixture.client import ClientHelper
 from fixture.group import GroupHelper
 from fixture.session import SessionHelper
 
-
-
 class Application:
 
     def __init__(self):
@@ -13,6 +11,7 @@ class Application:
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.client = ClientHelper(self)
+
 
     def open_home_page(self):
         wd = self.wd
