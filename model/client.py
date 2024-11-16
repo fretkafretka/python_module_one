@@ -1,6 +1,6 @@
 class Client:
 
-    def __init__(self, firstname, middlename, lastname, nickname, title, company, address, homephone, mobilephone, workphone, fax, emaleone, emailtwo, emailthree, homepage, daybirthday, monthbirthday, yearbirthday, annday, annmonth, annyear):
+    def __init__(self, firstname=None, middlename=None, lastname=None, nickname=None, title=None, company=None, address=None, homephone=None, mobilephone=None, workphone=None, fax=None, emaleone=None, emailtwo=None, emailthree=None, homepage=None, daybirthday=None, monthbirthday=None, yearbirthday=None, annday=None, annmonth=None, annyear=None):
         self.firstname = firstname
         self.middlename =middlename
         self.lastname = lastname
